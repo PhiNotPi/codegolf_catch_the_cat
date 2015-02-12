@@ -3,7 +3,7 @@ package main;
 import players.*;
 
 public class Controller {
-	public static final int NUMBER_OF_GAMES = 1;
+	public static final int NUMBER_OF_GAMES = 4;
 	public static final int FIELD_SIZE = 9;
 	Cat[] cats;
 	Catcher[] catchers;
@@ -14,7 +14,7 @@ public class Controller {
 	 * @return
 	 */
 	public Cat[] getCats(){
-		return new Cat[] {new RandCat(),new StupidRightCat()};//,new RandCat2()};
+		return new Cat[] {new RandCat(),new StupidRightCat()};
 	}
 	/**
 	 * Add your catcher class here.
@@ -38,8 +38,10 @@ public class Controller {
 		System.out.println("Playing Games");
 		//for each pairing of cat/catcher
 		for(int i=0;i<cats.length;i++){
-			for(int j=0;j<catchers.length;j++){//TODO: Implement number of games.
-				results[i][j][0] = playGame(cats[i],catchers[j]);
+			for(int j=0;j<catchers.length;j++){
+				for(int k=0; k < NUMBER_OF_GAMES; k++){
+					results[i][j][k] = playGame(cats[i],catchers[j]);
+				}
 			}
 		}	
 	}
@@ -98,12 +100,21 @@ public class Controller {
 	public static void main(String[] args){
 		Controller c = new Controller();
 		c.playGames();
-		for(int i=0;i<c.cats.length;i++){
+		int sum = 0;
+		for(int i = 0; i < c.cats.length; i++){
+			
 			System.out.println("");
-			for(int j=0;j<c.catchers.length;j++){
-				System.out.print(c.results[i][j][0]+"    ");
+			
+			for(int j = 0; j < c.catchers.length; j++){
+				
+				sum = 0;
+				
+				for(int k = 0; k < Controller.NUMBER_OF_GAMES; k++){
+					sum += c.results[i][j][k];
+				}
+				System.out.print(sum+"    ");
 			}
 		}
-	}
+	}//main
 
 }

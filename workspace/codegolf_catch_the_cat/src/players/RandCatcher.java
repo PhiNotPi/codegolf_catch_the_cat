@@ -2,6 +2,12 @@ package players;
 
 import main.Field;
 
+/**
+ * Places random Buckets (do not use with big field sizes, very inefficient if field is already pretty full)
+ * @author user
+ *
+ */
+
 public class RandCatcher implements Catcher {
 	public String getName(){
 		return "RandCatcher";
